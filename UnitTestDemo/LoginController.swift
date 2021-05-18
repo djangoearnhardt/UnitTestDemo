@@ -7,32 +7,17 @@
 
 import Foundation
 
-protocol LoginControlling: AnyObject {
-    var isStudent: Bool { get }
-    var isTeacher: Bool { get }
-    func saveAsStudent()
-    func saveAsTeacher()
-    func clearLoginKeys()
-}
-
-class LoginController: LoginControlling {
+/// LoginController saves Login state for a client.
+///
+/// When a Student or a Teacher logins, LoginController tracks their state.
+class LoginController {
     
     // MARK: - SINGLETON
     static let sharedInstance = LoginController()
     
     // MARK: - PROPERTIES
-    var userDefaults: UserDefaults
+    var userDefaults: UserDefaults = UserDefaults.standard
     
-    init(userDefaults: UserDefaults = UserDefaults.standard) {
-        self.userDefaults = userDefaults
-        debugPrint("\(userDefaults) | \(userDefaults.dictionaryWithValues(forKeys: [Constants.isTeacher, Constants.isStudent]))")
-    }
-    
-    deinit {
-        debugPrint("LoginController deinitialized")
-    }
-    
-    // MARK: - PROPERTIES
     var isStudent: Bool {
         userDefaults.bool(forKey: LoginKeys.isStudent.rawValue)
     }

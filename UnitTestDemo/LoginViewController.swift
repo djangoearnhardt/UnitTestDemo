@@ -12,18 +12,9 @@ class LoginViewController: UIViewController, ButtonTapping {
     // MARK: - PROPERTIES
     let loginConfirmationView: LoginConfirmationView = LoginConfirmationView()
     
-    let loginController: LoginControlling?
+    let loginController: LoginController = LoginController.sharedInstance
     
-    init(loginController: LoginControlling = LoginController.sharedInstance) {
-        self.loginController = loginController
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        loginController = LoginController.sharedInstance
-        super.init(coder: aDecoder)
-    }
-    
+    // MARK: - LIFECYCLE
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         styleForLogInResult()
@@ -35,6 +26,7 @@ class LoginViewController: UIViewController, ButtonTapping {
         constructAndConstraintSubview()
     }
     
+    // MARK: - FUNCTIONS
     func constructAndConstraintSubview() {
         view.addSubview(loginConfirmationView)
         loginConfirmationView.translatesAutoresizingMaskIntoConstraints = false
@@ -47,11 +39,11 @@ class LoginViewController: UIViewController, ButtonTapping {
     }
     
     func styleForLogInResult() {
-        if loginController?.isTeacher == true {
+        if loginController.isTeacher == true {
             DispatchQueue.main.async {
                 self.loginConfirmationView.styleForTeacher()
             }
-        } else if loginController?.isStudent == true {
+        } else if loginController.isStudent == true {
             DispatchQueue.main.async {
                 self.loginConfirmationView.styleForStudent()
             }
@@ -65,11 +57,11 @@ class LoginViewController: UIViewController, ButtonTapping {
     func didTapButton(loginKey: LoginKeys) {
         switch loginKey {
         case .clear:
-                loginController?.clearLoginKeys()
+                loginController.clearLoginKeys()
         case .isStudent:
-                loginController?.saveAsStudent()
+                loginController.saveAsStudent()
         case .isTeacher:
-                loginController?.saveAsTeacher()
+                loginController.saveAsTeacher()
         }
     }
 }

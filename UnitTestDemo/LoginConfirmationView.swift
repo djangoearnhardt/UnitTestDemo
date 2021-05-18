@@ -9,13 +9,39 @@ import UIKit
 
 class LoginConfirmationView: UIView, ButtonTapping {
     
-    private let noMusicImageView: UIImageView = {
-        let noMusicImageView = UIImageView()
+    /*
+      -----------------------------
+     |   ----------      ------    |
+     |  - Profile  -    - Reset -  |
+     |  -   Image  -    - State -  |
+     |  -    View  -   - Button -  |
+     |   ----------      ------    |
+     |                             |
+     |   ----------                |
+     |   -  Title -                |
+     |   -  Label -                |
+     |   ----------                |
+     |                             |
+     |   ----------                |
+     |   -  Login -                |
+     |   - Button -                |
+     |   ----------                |
+     |                             |
+     |   ----------                |
+     |  - Segmented -              |
+     |   - Control -               |
+     |   ----------                |
+      -----------------------------
+     */
+    
+    // MARK: - PROPERTIES
+    private let profileImageView: UIImageView = {
+        let profileImageView = UIImageView()
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular, scale: .large)
-        noMusicImageView.image = UIImage(systemName: "person.crop.circle", withConfiguration: largeConfig)
-        noMusicImageView.tintColor = .black
-        noMusicImageView.contentMode = .scaleAspectFit
-        return noMusicImageView
+        profileImageView.image = UIImage(systemName: "person.crop.circle", withConfiguration: largeConfig)
+        profileImageView.tintColor = .black
+        profileImageView.contentMode = .scaleAspectFit
+        return profileImageView
     }()
     
     private let titleLabel: UILabel = {
@@ -32,7 +58,7 @@ class LoginConfirmationView: UIView, ButtonTapping {
     private let resetStateButton: UIButton = {
         let resetStateButton = UIButton()
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
-        resetStateButton.setImage(UIImage(systemName: "delete.left.fill", withConfiguration: largeConfig), for: .normal)
+        resetStateButton.setImage(UIImage(systemName: "clear.fill", withConfiguration: largeConfig), for: .normal)
         resetStateButton.tintColor = .black
         resetStateButton.addTarget(self, action: #selector(clearUserDefaults), for: .touchUpInside)
         return resetStateButton
@@ -70,34 +96,34 @@ class LoginConfirmationView: UIView, ButtonTapping {
     // MARK: - FUNCTIONS
     func constructSubviews() {
         addSubview(resetStateButton)
-        addSubview(noMusicImageView)
+        addSubview(profileImageView)
         addSubview(titleLabel)
         addSubview(loginButton)
         addSubview(segmentedControl)
     }
     
     func constructSubviewConstraints() {
-        let views = [resetStateButton, noMusicImageView, titleLabel, loginButton, segmentedControl]
+        let views = [resetStateButton, profileImageView, titleLabel, loginButton, segmentedControl]
         
         views.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        // loginButton
+        // resetStateButton
         NSLayoutConstraint.activate([
             resetStateButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             resetStateButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
         ])
         
-        // noMusicImageView
+        // profileImageView
         NSLayoutConstraint.activate([
-            noMusicImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -100),
-            noMusicImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            noMusicImageView.heightAnchor.constraint(equalToConstant: 125),
-            noMusicImageView.widthAnchor.constraint(equalToConstant: 125)
+            profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -100),
+            profileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            profileImageView.heightAnchor.constraint(equalToConstant: 125),
+            profileImageView.widthAnchor.constraint(equalToConstant: 125)
         ])
         
         // titleLabel
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: noMusicImageView.bottomAnchor, constant: 50),
+            titleLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 50),
             titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
         
@@ -133,40 +159,44 @@ class LoginConfirmationView: UIView, ButtonTapping {
         styleForOnboarding()
     }
 
-    
+    // Style UI to represent a Teacher successfully logged in
     func styleForTeacher() {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular, scale: .large)
-        noMusicImageView.image = UIImage(systemName: "person.crop.circle.fill.badge.checkmark", withConfiguration: largeConfig)
-        noMusicImageView.tintColor = .systemGreen
+        profileImageView.image = UIImage(systemName: "person.crop.circle.fill.badge.checkmark", withConfiguration: largeConfig)
+        profileImageView.tintColor = .systemGreen
         loginButton.isEnabled = false
         loginButton.setTitle(Constants.teacher, for: .normal)
         segmentedControl.isHidden = true
     }
 
+    // Style UI to represent a Student successfully logged in
     func styleForStudent() {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular, scale: .large)
-        noMusicImageView.image = UIImage(systemName: "person.crop.circle.fill.badge.checkmark", withConfiguration: largeConfig)
-        noMusicImageView.tintColor = .systemGreen
+        profileImageView.image = UIImage(systemName: "person.crop.circle.fill.badge.checkmark", withConfiguration: largeConfig)
+        profileImageView.tintColor = .systemGreen
         loginButton.isEnabled = false
         loginButton.setTitle(Constants.student, for: .normal)
         segmentedControl.isHidden = true
     }
     
+    // Style UI to represent needing onboarding
     func styleForOnboarding() {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular, scale: .large)
-        noMusicImageView.image = UIImage(systemName: "person.crop.circle", withConfiguration: largeConfig)
-        noMusicImageView.tintColor = .black
+        profileImageView.image = UIImage(systemName: "person.crop.circle", withConfiguration: largeConfig)
+        profileImageView.tintColor = .black
         loginButton.isEnabled = true
         loginButton.setTitle(Constants.chooseAProfile, for: .normal)
         segmentedControl.isHidden = false
     }
 }
 
+// MARK: - BUTTON TAPPING
+// Delegate a UIButton tap
 protocol ButtonTapping {
     func didTapButton(loginKey: LoginKeys)
 }
 
-
+// MARK: - CONSTANTS
 struct Constants {
     static let chooseAProfile = "Choose a profile"
     static let clear = "clearUserDefaults"

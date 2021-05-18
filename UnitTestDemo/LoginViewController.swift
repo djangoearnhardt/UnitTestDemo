@@ -14,6 +14,7 @@ class LoginViewController: UIViewController, ButtonTapping {
     
     let loginController: LoginControlling?
     
+    // MARK: - LIFECYCLE
     init(loginController: LoginControlling = LoginController.sharedInstance) {
         self.loginController = loginController
         super.init(nibName: nil, bundle: nil)
@@ -35,6 +36,7 @@ class LoginViewController: UIViewController, ButtonTapping {
         constructAndConstraintSubview()
     }
     
+    // MARK: - FUNCTIONS
     func constructAndConstraintSubview() {
         view.addSubview(loginConfirmationView)
         loginConfirmationView.translatesAutoresizingMaskIntoConstraints = false

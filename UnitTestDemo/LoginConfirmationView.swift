@@ -73,7 +73,7 @@ class LoginConfirmationView: UIView, ButtonTapping {
         return loginButton
     }()
     
-    private let segmentedControl: UISegmentedControl = {
+    public let segmentedControl: UISegmentedControl = {
         let items = [Constants.student, Constants.teacher]
         let segmentControl = UISegmentedControl(items: items)
         segmentControl.isHidden = false

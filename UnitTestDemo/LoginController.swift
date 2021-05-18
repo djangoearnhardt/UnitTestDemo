@@ -15,6 +15,9 @@ protocol LoginControlling: AnyObject {
     func clearLoginKeys()
 }
 
+/// LoginController saves Login state for a client.
+///
+/// When a Student or a Teacher logins, LoginController tracks their state.
 class LoginController: LoginControlling {
     
     // MARK: - SINGLETON

@@ -70,6 +70,10 @@ class LoginConfirmationView: UIView, ButtonTapping {
         loginButton.setTitle(Constants.chooseAProfile, for: .normal)
         loginButton.setTitleColor(.black, for: .normal)
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        loginButton.layer.borderWidth = 1
+        loginButton.layer.borderColor = UIColor.black.cgColor
+        loginButton.layer.cornerRadius = 8
+        loginButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         return loginButton
     }()
     
@@ -130,7 +134,7 @@ class LoginConfirmationView: UIView, ButtonTapping {
         // loginButton
         NSLayoutConstraint.activate([
             loginButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            loginButton.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            loginButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
         
         // segmentedControl

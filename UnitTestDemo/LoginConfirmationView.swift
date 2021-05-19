@@ -70,6 +70,10 @@ class LoginConfirmationView: UIView, ButtonTapping {
         loginButton.setTitle(Constants.chooseAProfile, for: .normal)
         loginButton.setTitleColor(.black, for: .normal)
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        loginButton.layer.borderWidth = 1
+        loginButton.layer.borderColor = UIColor.black.cgColor
+        loginButton.layer.cornerRadius = 8
+        loginButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         return loginButton
     }()
     
@@ -165,6 +169,7 @@ class LoginConfirmationView: UIView, ButtonTapping {
         profileImageView.image = UIImage(systemName: "person.crop.circle.fill.badge.checkmark", withConfiguration: largeConfig)
         profileImageView.tintColor = .systemGreen
         loginButton.isEnabled = false
+        loginButton.layer.borderWidth = 0
         loginButton.setTitle(Constants.teacher, for: .normal)
         segmentedControl.isHidden = true
     }
@@ -175,6 +180,7 @@ class LoginConfirmationView: UIView, ButtonTapping {
         profileImageView.image = UIImage(systemName: "person.crop.circle.fill.badge.checkmark", withConfiguration: largeConfig)
         profileImageView.tintColor = .systemGreen
         loginButton.isEnabled = false
+        loginButton.layer.borderWidth = 0
         loginButton.setTitle(Constants.student, for: .normal)
         segmentedControl.isHidden = true
     }
@@ -185,6 +191,7 @@ class LoginConfirmationView: UIView, ButtonTapping {
         profileImageView.image = UIImage(systemName: "person.crop.circle", withConfiguration: largeConfig)
         profileImageView.tintColor = .black
         loginButton.isEnabled = true
+        loginButton.layer.borderWidth = 1
         loginButton.setTitle(Constants.chooseAProfile, for: .normal)
         segmentedControl.isHidden = false
     }

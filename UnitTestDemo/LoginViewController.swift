@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, ButtonTapping {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        styleForLogInResult()
+        styleForLogInResult {}
     }
     
     override func viewDidLoad() {
@@ -48,18 +48,21 @@ class LoginViewController: UIViewController, ButtonTapping {
         ])
     }
     
-    func styleForLogInResult() {
+    func styleForLogInResult(completion: @escaping () -> Void) {
         if loginController?.isTeacher == true {
             DispatchQueue.main.async {
                 self.loginConfirmationView.styleForTeacher()
+                completion()
             }
         } else if loginController?.isStudent == true {
             DispatchQueue.main.async {
                 self.loginConfirmationView.styleForStudent()
+                completion()
             }
         } else {
             DispatchQueue.main.async {
                 self.loginConfirmationView.styleForOnboarding()
+                completion()
             }
         }
     }

@@ -53,7 +53,7 @@ class LoginViewControllerTests: XCTestCase {
 
     func testThatLoginShowsTeacherUI() {
         // GIVEN
-        // A Student has logged in before
+        // A Teacher has logged in before
         prepareLoginController(with: .isTeacher)
         guard let loginViewController = loginViewController else {
             XCTFail("LoginViewController failed to initialize")
@@ -61,14 +61,14 @@ class LoginViewControllerTests: XCTestCase {
         }
         
         // WHEN
-        loginViewController.styleForLogInResult()
-        
+        // The LoginController UI loads
         let uiDelayExpectation = expectation(description: "Waiting for UI update")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                uiDelayExpectation.fulfill()
-            }
-        
+        loginViewController.styleForLogInResult {
+            uiDelayExpectation.fulfill()
+        }
+
         // THEN
+        // The segmentedControl should be hidden
         waitForExpectations(timeout: 0.1)
         XCTAssert(loginViewController.loginConfirmationView.segmentedControl.isHidden == true)
     }
@@ -83,14 +83,14 @@ class LoginViewControllerTests: XCTestCase {
         }
                 
         // WHEN
-        loginViewController.styleForLogInResult()
-        
+        // The LoginController UI loads
         let uiDelayExpectation = expectation(description: "Waiting for UI update")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        loginViewController.styleForLogInResult {
             uiDelayExpectation.fulfill()
         }
         
         // THEN
+        // The segmentedControl should be hidden
         waitForExpectations(timeout: 0.1)
         XCTAssert(loginViewController.loginConfirmationView.segmentedControl.isHidden == true)
     }
@@ -105,14 +105,14 @@ class LoginViewControllerTests: XCTestCase {
         }
         
         // WHEN
-        loginViewController.styleForLogInResult()
-        
+        // The LoginController UI loads
         let uiDelayExpectation = expectation(description: "Waiting for UI update")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                uiDelayExpectation.fulfill()
-            }
-        
+        loginViewController.styleForLogInResult {
+            uiDelayExpectation.fulfill()
+        }
+
         // THEN
+        // The segmentedControl should be visible for "onboarding"
         waitForExpectations(timeout: 0.1)
         XCTAssert(loginViewController.loginConfirmationView.segmentedControl.isHidden == false)
     }

@@ -13,3 +13,6 @@ Dependency injection
 Note:
 
 UserDefaults is unreliable in XCode simulators. Use a real device to reliably see saved state.
+
+<br>
+<img src="https://user-images.githubusercontent.com/14178930/118821178-d638f300-b86b-11eb-8cf7-7cccc5e86ea5.png" width="250">

@@ -34,8 +34,8 @@ class LoginControllerTests: XCTestCase {
         loginController = LoginController(userDefaults: customUserDefaults)
     }
 
-    func testThatCustomUserDefaultsIsRemovedFromMemory() {
-        // GIVEN
+    func testThatCustomUserDefaultsCanSaveACustomKey() {
+        // GIVEN, WHEN
         // A custom UserDefaults object
         guard let customUserDefaults = self.customUserDefaults else {
             XCTFail("Could not initialize customUserDefaults")

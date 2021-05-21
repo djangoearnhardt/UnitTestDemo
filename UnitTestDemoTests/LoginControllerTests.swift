@@ -33,6 +33,19 @@ class LoginControllerTests: XCTestCase {
         }
         loginController = LoginController(userDefaults: customUserDefaults)
     }
+    
+    // MARK: - TESTS
+    func testThatCustomUserDefaultsInitializes() {
+        // GIVEN
+        // A UserDefaults object
+        guard let customUserDefaults = customUserDefaults else {
+            XCTFail("UserDefaults did not initialize")
+            return
+        }
+        
+        // THEN
+        XCTAssertNotNil(customUserDefaults)
+    }
 
     func testThatCustomUserDefaultsCanSaveACustomKey() {
         // GIVEN, WHEN
